@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 import za.co.bogote.crudappdemo.Modal.Employee;
 
 import javax.persistence.EntityManager;
@@ -18,7 +19,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public List<Employee> get() {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Employee> query = currentSession.createQuery("from Employee, Employee.class");
+        Query<Employee> query = currentSession.createQuery("from Employee", Employee.class);
         List<Employee> list = query.getResultList();
         return list;
     }
